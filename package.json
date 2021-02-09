@@ -4,7 +4,12 @@
   "description": "Customer Support And Ticketing System",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/api.js",
+    "dev": "nodemon src/api.ts",
+    "build": "tsc -p .",
+    "test": "SET \"NODE_ENV=test\" && mocha -r ts-node/register src/test/**/*.test.ts --timeout=15000",
+    "test-watch": "nodemon --exec \"npm test\"",
+    "cypress": "cypress open"
   },
   "repository": {
     "type": "git",
