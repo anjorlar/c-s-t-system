@@ -9,7 +9,7 @@ import { logger } from "./utils/logger"
 import { connectMongoDb } from "./config/mongoose"
 import redis from "./config/redis"
 import { httpResponse } from "./utils/http_response"
-// import BaseRoute from "./routes"
+import BaseRoute from "./routes"
 
 // Init express
 const app: express.Application = express();
@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // Route
-// app.use("/api/v1", BaseRoute)
+app.use("/api/v1", BaseRoute)
 
 app.get("/", (req: express.Request, res: express.Response) => {
     return httpResponse.successResponse(
