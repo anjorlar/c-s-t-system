@@ -32,7 +32,8 @@ const Utils = {
             });
             return decoded;
         } catch (err) {
-            throw new Error("Invalid Token")
+            // console.log('error err', err)
+            throw new Error(`${err.name}:${err.message}`)
         }
     },
 

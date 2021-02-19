@@ -19,16 +19,18 @@ export const authToken = (req: any, res: Response, next: NextFunction) => {
         const errMessage = "Access denied. No token provided."
         return httpResponse.errorResponse(res, errMessage, StatusCodes.UNAUTHORIZED)
     }
-    const token = bearerToken.split(' ')[1];
+    const token = bearerToken.split(' ')[0];
     //verify token
     try {
         const decoded = utils.verifyToken(token)
 
         req.id = decoded.id;
+        console.log(">>>>>> req.id", req.id)
         next()
     } catch (err) {
-        const errMessage = "Invalid token. Please login"
-        return httpResponse.errorResponse(res, errMessage, StatusCodes.UNAUTHORIZED)
+        console.log('>>>>>>> err', err)
+        // const errMessage = "Invalid token. Please login"
+        return httpResponse.errorResponse(res, err.message, StatusCodes.UNAUTHORIZED)
     }
 };
 
@@ -49,8 +51,10 @@ export const authAdmin = async (req: any, res: Response, next: NextFunction) => 
         }
 
         req.user = admin;
+        console.log(">>>>>  req.user", req.user)
         next()
     } catch (err) {
+        console.log('>>>>>>> err', err)
         const errMessage = "Invalid token. Please login"
         return httpResponse.errorResponse(res, errMessage, StatusCodes.UNAUTHORIZED)
     }
@@ -72,6 +76,7 @@ export const adminAccess = async (req: any, res: Response, next: NextFunction) =
         }
         next()
     } catch (err) {
+        console.log('>>>>>>> err', err)
         const errMessage = "Access denied. Unauthorized action"
         return httpResponse.errorResponse(res, errMessage, StatusCodes.UNAUTHORIZED)
     }
@@ -97,6 +102,7 @@ export const authUser = async (req: any, res: Response, next: NextFunction) => {
         req.user = user;
         next()
     } catch (err) {
+        console.log('>>>>>>> err', err)
         const errMessage = "Invalid token. Please login"
         return httpResponse.errorResponse(res, errMessage, StatusCodes.UNAUTHORIZED)
     }
