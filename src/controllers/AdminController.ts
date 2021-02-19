@@ -7,7 +7,13 @@ import { httpResponse } from "../utils/http_response"
 import { CreateAdminSchema } from "../utils/validation/admin"
 import { IRequestAdmin, IAdmin } from "../utils/types/custom"
 
-
+/**
+ * @description As an admin with the role admin you should be able create other admin user with unique email
+ * @route POST: '/api/v1/admin/invite'
+ * @param {Object} req req request any
+ * @param {Object} res res response any
+ * @returns {void|Object} object
+ */
 export async function newAdmin(req: IRequestAdmin, res: Response) {
     try {
         //validate request payload

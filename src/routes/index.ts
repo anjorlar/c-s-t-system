@@ -1,10 +1,8 @@
 import { Request, Response, Router } from "express"
 import { httpResponse } from "../utils/http_response"
 import AdminRouter from "./Admin"
-// import {}
-
-
-
+import TicketRouter from "./Ticket"
+import UserRouter from "./User"
 
 //init router and path
 const router = Router();
@@ -14,9 +12,13 @@ router.use("/health", (req: Request, res: Response) => {
     return httpResponse.successResponse(res, [], message)
 });
 
+
 //Add sub routes
 
-router.post("/admin", AdminRouter)
+router.use(UserRouter)
+router.use(TicketRouter)
+router.use("/admin", AdminRouter)
+
 
 
 export default router
