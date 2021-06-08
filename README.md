@@ -17,5 +17,6 @@ create a .env file in the root directory and fill in appropriate environmental v
 * on development redis should the installed and running on your machine
 * run `npm run dev to start this app in development mode`
 
-## Testing
-* npm run test
+## Documentation
+To access the documentation click the link below
+[Postman Documentation](https://documenter.getpostman.com/view/7087675/TzY7cDJq)
