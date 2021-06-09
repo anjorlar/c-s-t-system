@@ -39,7 +39,7 @@ interface ICollections {
 
 const settings: IEnv = {
     appName: "customer support ticketing systems",
-    environment: process.env.NODE_ENV || "development",
+    environment: process.env.NODE_ENV!,
     port: Number(process.env.port),
     jwt: {
         SECRETKEY: process.env.JWT_SECRET_KEY!,

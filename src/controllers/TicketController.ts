@@ -1,5 +1,5 @@
 import { Response } from "express"
-import { uuid } from 'uuidv4'
+import { v4 as uuidv4 } from 'uuid'
 const { parse } = require("json2csv")
 import { IRequestUser, ITicket, IRequestAdmin } from "../utils/types/custom"
 import TicketService from "../services/TicketService"
@@ -32,7 +32,7 @@ export async function newTicket(req: IRequestUser, res: Response) {
 
         const ticketObject: ITicket = {
             subject, content,
-            ticketId: uuid(),
+            ticketId: uuidv4(),
             userId: userId
         }
         //save ticket

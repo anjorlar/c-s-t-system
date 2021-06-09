@@ -28,19 +28,19 @@ export async function loginAdmin(req: IRequestAdmin, res: Response) {
 
         const admin: any = await AdminService.getAdminByEmail(email.toLowerCase())
         if (!admin) {
-            return httpResponse.errorResponse(res, "Invalid login credentials", StatusCodes.NOT_FOUND)
+            return httpResponse.errorResponse(res, "Invalid login credentials", StatusCodes.UNAUTHORIZED)
         }
         // verify password and generate token
         const passwordMatch = await utils.validatePassword(password, admin.password)
         if (!passwordMatch) {
-            return httpResponse.errorResponse(res, "Invalid login credentials", StatusCodes.NOT_FOUND)
+            return httpResponse.errorResponse(res, "Invalid login credentials", StatusCodes.UNAUTHORIZED)
         }
         const token = admin.generateAuthToken()
 
         return httpResponse.successResponse(res, {
             user: admin,
             token
-        }, "User login successful", StatusCodes.UNAUTHORIZED)
+        }, "User login successful", StatusCodes.OK)
     } catch (error) {
         logger.error(JSON.stringify(error))
         return httpResponse.errorResponse(res, error.message, StatusCodes.INTERNAL_SERVER_ERROR)
@@ -66,7 +66,7 @@ export async function loginUser(req: IRequestUser, res: Response) {
         const user: any = await UserService.getUserByEmail(email.toLowerCase())
         if (!user) {
             const errMessage = "Invalid login credentials"
-            return httpResponse.errorResponse(res, errMessage, StatusCodes.NOT_FOUND)
+            return httpResponse.errorResponse(res, errMessage, StatusCodes.UNAUTHORIZED)
         }
 
         //verify passwaord and generate token
