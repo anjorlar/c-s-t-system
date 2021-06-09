@@ -25,7 +25,7 @@ export const authToken = (req: any, res: Response, next: NextFunction) => {
         const decoded = utils.verifyToken(token)
 
         req.id = decoded.id;
-        console.log(">>>>>> req.id", req.id)
+
         next()
     } catch (err) {
         console.log('>>>>>>> err', err)
@@ -51,7 +51,7 @@ export const authAdmin = async (req: any, res: Response, next: NextFunction) => 
         }
 
         req.user = admin;
-        console.log(">>>>>  req.user", req.user)
+        // console.log(">>>>>  req.user", req.user)
         next()
     } catch (err) {
         console.log('>>>>>>> err', err)
