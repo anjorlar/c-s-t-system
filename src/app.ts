@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import StatusCodes from "http-status-codes"
+import morgan from "morgan"
 
 // imported modules
 import { settings } from "./config/settings"
@@ -21,6 +22,9 @@ app.disable("x-powered-by");
 
 app.use(helmet())
 app.use(cors())
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'))
+}
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
