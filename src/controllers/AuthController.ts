@@ -11,7 +11,7 @@ import { IRequestAdmin, IRequestUser } from "../utils/types/custom"
 /**
  * loginAdmin
  * @description As an admin you should be able login
- * Route: Post: '/api/v1/admin/login'
+ * @route Post: '/api/v1/admin/login'
  * @param {Object} req request object
  * @param {Object} res response object
  * @returns {void|Object} object
@@ -50,7 +50,7 @@ export async function loginAdmin(req: IRequestAdmin, res: Response) {
 /**
  * loginUser
  * @description As a user with correct credentials you should be able login
- * Route: Post: '/api/v1/login'
+ * @route Post: '/api/v1/login'
  * @param {Object} req request object
  * @param {Object} res response object
  * @returns {void|Object} object

@@ -9,13 +9,12 @@ import { httpResponse } from "../utils/http_response"
 import { CreateTicketSchema, UpdateTicketCommentSchema } from "../utils/validation/ticket"
 import utils from "../utils/utils"
 import redis from "../config/redis"
-import { error } from "winston"
 
 
 /**
  * newTicket
  * @description A user should be able to create support ticket
- * @Route Route '/api/v1/ticket'
+ * @route post: '/api/v1/ticket'
  * @param req request object
  * @param res response object
  * @returns {void|Object} object
@@ -50,7 +49,7 @@ export async function newTicket(req: IRequestUser, res: Response) {
 /**
  * getTicket
  * @description A user gets the details of a ticket with a given id
- * route: get: '/api/v1/ticket/:id'
+ * @route get: '/api/v1/ticket/:id'
  * @param {object} req request object
  * @param {object} res response object
  * @returns {void|object} object
@@ -73,7 +72,14 @@ export async function getTicket(req: IRequestUser, res: Response) {
     }
 };
 
-
+/**
+ * findTicket
+ * @description An admin gets the details of a ticket with a given id
+ * @route get: '/api/v1/admin/tickets/:id'
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {void|object} object
+ */
 export async function findTicket(req: IRequestUser, res: Response) {
     try {
         const ticketId = req.params.id
@@ -91,6 +97,14 @@ export async function findTicket(req: IRequestUser, res: Response) {
     }
 };
 
+/**
+ * getUserTicket
+ * @description Gets a user's tickets history with the date and status passed
+ * @route get: '/api/v1/tickets/history'
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {void|object} object
+ */
 export async function getUserTickets(req: any, res: Response) {
     try {
         const userId = req.user?._id
@@ -119,6 +133,14 @@ export async function getUserTickets(req: any, res: Response) {
 };
 
 
+/**
+ * userCommentOnTicket
+ * @description allows user add comment to a particular ticket
+ * @route put: '/api/v1/tickets/:id'
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {void|object} object
+ */
 export async function userCommentOnTicket(req: any, res: Response) {
     try {
         const userId = req.user?._id
@@ -162,6 +184,14 @@ export async function userCommentOnTicket(req: any, res: Response) {
 }
 
 
+/**
+ * updateTicket
+ * @description An admin adds comment to a ticket with a given id
+ * @route put: '/api/v1/admin/tickets/:id'
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {void|object} object
+ */
 export async function updateTicket(req: any, res: Response) {
     try {
         const userId = req.user?._id
@@ -221,6 +251,14 @@ export async function updateTicket(req: any, res: Response) {
 }
 
 
+/**
+ * getAllTickets
+ * @description allows admin get all tickets
+ * @route get: '/api/v1/tickets'
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {void|object} object
+ */
 export async function getAllTickets(req: any, res: Response) {
     try {
         const defaultStartDate = new Date("1970-01-01").toISOString()
@@ -249,6 +287,14 @@ export async function getAllTickets(req: any, res: Response) {
 }
 
 
+/**
+ * getTicketsReport
+ * @description allows admin get closed ticket report in CSV format
+ * @route get: '/api/v1/tickets/report'
+ * @param {object} req request object
+ * @param {object} res response object
+ * @returns {void|object} object
+ */
 export async function getTicketsReport(req: any, res: Response) {
     try {
         const tickets: any = await TicketService.getClosedUserTickets()

@@ -9,7 +9,7 @@ import { CreateUserSchema } from "../utils/validation/user"
 
 /**
  * newUser
- * @route Route 
+ * @route Post: '/api/v1/register' 
  * @description
  * @param {Object} req req request any
  * @param {Object} res rer response any
